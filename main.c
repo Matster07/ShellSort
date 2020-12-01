@@ -26,8 +26,6 @@ void initArr(int intArr[], int sizeArr) {
 
     for (int i = 0; i < sizeArr; i++) {
           intArr[i]=rand();
-//        printf("Enter %d element:\n", i); // Раскомментируйте чтобы заполнить массив вручную
-//        scanf("%d", &intArr[i]);
     }
 }
 
@@ -59,23 +57,18 @@ int getNumIncArrAndInitIncArr(int increment[], int sizeArr) {
 }
 
 void sort(int intArr[], int sizeArr) {
-    int increment[100]; // Массив с приращениями
-    int inc; // Вспомогательное число для значений приращений
-    int numInc; // Количество значений приращений внутри массива приращений
-    int comp; // Вспомогательное число для значений массива
-    unsigned long startUnixTime; // Время перед сортировкой массива
-    unsigned long finishUnixTime; // Время после сортировки массива
-    unsigned long dif; // Время сортировки
+    int increment[100];
+    int inc;
+    int numInc;
+    int comp;
 
-    numInc = getNumIncArrAndInitIncArr(increment, sizeArr); // Находит количество значений приращений внутри массива приращений
+    numInc = getNumIncArrAndInitIncArr(increment, sizeArr);
 
-//    printArr(intArr, sizeArr); // Раскомментируйте, чтобы посмотреть изначальный массив
-    startUnixTime = (unsigned long) time(NULL);
     while (numInc > 0) {
-        inc = increment[numInc--]; // Получает значение крайнего приращения
+        inc = increment[numInc--];
         int j = 0, i = 0;
 
-        while (j = i + inc < sizeArr) { // Проходиться пузырьком по группе элементов, расстояние между которыми равно приращению, пока это приращение не станет равно 1
+        while (j = i + inc < sizeArr) {
             if (intArr[i] > intArr[j]) {
                 comp = intArr[i];
                 intArr[i] = intArr[j];
@@ -86,15 +79,9 @@ void sort(int intArr[], int sizeArr) {
         }
     }
 
-    insertSort(intArr, sizeArr); // Окончательная сортировка вставками
-    finishUnixTime = (unsigned long) time(NULL);
-    dif = finishUnixTime - startUnixTime;
+    insertSort(intArr, sizeArr);
 
     printArr(intArr, sizeArr);
-
-    printf("\nIt took - %lu\n", startUnixTime);
-    printf("\nIt took - %lu\n", finishUnixTime);
-    printf("\nIt took - %lu\n", dif);
 }
 
 void insertSort(int intArr[], int sizeArr)
@@ -126,12 +113,12 @@ void printArr(int array[], int sizeArr) {
 
 void main()
 {
-    int sizeArr = getArraySize(); // Вводим размер массива
-    int intArr[sizeArr]; // Создаем  массив заданной длины
+    int sizeArr = getArraySize();
+    int intArr[sizeArr];
 
-    initArr(&intArr, sizeArr); // Заполняем значениями массив
+    initArr(&intArr, sizeArr);
 
-    sort(&intArr, sizeArr); // Сортировка
+    sort(&intArr, sizeArr);
 
     getch();
 }
